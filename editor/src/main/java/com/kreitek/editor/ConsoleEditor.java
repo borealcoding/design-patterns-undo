@@ -1,9 +1,9 @@
 package com.kreitek.editor;
 
 import com.kreitek.editor.commands.CommandFactory;
+import com.kreitek.editor.memento.Memento;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleEditor implements Editor {
     public static final String TEXT_RESET = "\u001B[0m";
@@ -83,5 +83,4 @@ public class ConsoleEditor implements Editor {
     private void printToConsole(String message) {
         System.out.print(message);
     }
-
 }

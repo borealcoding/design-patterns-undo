@@ -1,11 +1,13 @@
 package com.kreitek.editor.commands;
 
-import com.kreitek.editor.*;
-
-import java.util.ArrayList;
+import com.kreitek.editor.BadCommandException;
+import com.kreitek.editor.Command;
+import com.kreitek.editor.ExitException;
+import com.kreitek.editor.memento.EditorCaretaker;
 
 public class CommandFactory {
     private static final CommandParser commandParser = new CommandParser();
+    private EditorCaretaker editorCaretaker;
 
     public Command getCommand(String commandLine) throws BadCommandException, ExitException {
         String[] args = commandParser.parse(commandLine);
