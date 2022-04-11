@@ -2,41 +2,41 @@ package com.kreitek.editor.commands;
 
 import com.kreitek.editor.BadCommandException;
 import com.kreitek.editor.Command;
+import com.kreitek.editor.Editor;
 import com.kreitek.editor.ExitException;
 import com.kreitek.editor.memento.EditorCaretaker;
 
 public class CommandFactory {
     private static final CommandParser commandParser = new CommandParser();
-    private EditorCaretaker editorCaretaker;
+    private EditorCaretaker editorCaretaker = new EditorCaretaker();
 
     public Command getCommand(String commandLine) throws BadCommandException, ExitException {
         String[] args = commandParser.parse(commandLine);
         return switch (args[0]) {
-            case "a" -> createAppendCommand(args[1]);
-            case "u" -> createUpdateCommand(args[1], args[2]);
-            case "d" -> createDeleteCommand(args[1]);
-            case "undo" -> createUndoCommand();
+            case "a" -> createAppendCommand(editorCaretaker, args[1]);
+            case "u" -> createUpdateCommand(editorCaretaker, args[1], args[2]);
+            case "d" -> createDeleteCommand(editorCaretaker, args[1]);
+            case "undo" -> createUndoCommand(editorCaretaker);
             default -> throw new ExitException();
         };
     }
 
-    private Command createUndoCommand() {
-        // TODO create undo command
-        return new UndoCommand();
+    private Command createUndoCommand(EditorCaretaker editorCaretaker) {
+        return new UndoCommand(editorCaretaker);
     }
 
-    private Command createDeleteCommand(String lineNumber) {
+    private Command createDeleteCommand(EditorCaretaker editorCaretaker, String lineNumber) {
         int number = Integer.parseInt(lineNumber);
-        return new DeleteCommand(number);
+        return new DeleteCommand(editorCaretaker, number);
     }
 
-    private Command createUpdateCommand(String lineNumber, String text) {
+    private Command createUpdateCommand(EditorCaretaker editorCaretaker, String lineNumber, String text) {
         int number = Integer.parseInt(lineNumber);
-        return new UpdateCommand(text, number);
+        return new UpdateCommand(editorCaretaker, text, number);
     }
 
-    private Command createAppendCommand(String text) {
-        return new AppendCommand(text);
+    private Command createAppendCommand(EditorCaretaker editorCaretaker, String text) {
+        return new AppendCommand(editorCaretaker, text);
     }
 
 }
