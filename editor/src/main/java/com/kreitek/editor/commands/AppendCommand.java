@@ -1,12 +1,13 @@
 package com.kreitek.editor.commands;
 
-import com.kreitek.editor.Command;
+import com.kreitek.editor.interfaces.Command;
+import com.kreitek.editor.interfaces.MementoKeeper;
 import com.kreitek.editor.memento.EditorCaretaker;
 import com.kreitek.editor.memento.Memento;
 
 import java.util.ArrayList;
 
-public class AppendCommand implements Command {
+public class AppendCommand implements Command, MementoKeeper {
     private final String text;
     private EditorCaretaker editorCaretaker;
 
@@ -21,8 +22,8 @@ public class AppendCommand implements Command {
         editorCaretaker.push(saveMemento(documentLines));
     }
 
-    private Memento saveMemento(ArrayList<String> documentLines) {
+    public Memento saveMemento(ArrayList<String> documentLines) {
         ArrayList<String> copyDocumentLines = (ArrayList<String>) documentLines.clone();
-        return new Memento(documentLines);
+        return new Memento(copyDocumentLines);
     }
 }

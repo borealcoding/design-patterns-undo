@@ -1,4 +1,4 @@
-package com.kreitek.editor;
+package com.kreitek.editor.interfaces;
 
 import java.util.ArrayList;
 

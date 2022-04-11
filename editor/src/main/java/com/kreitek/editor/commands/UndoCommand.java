@@ -1,6 +1,6 @@
 package com.kreitek.editor.commands;
 
-import com.kreitek.editor.Command;
+import com.kreitek.editor.interfaces.Command;
 import com.kreitek.editor.memento.EditorCaretaker;
 import com.kreitek.editor.memento.Memento;
 
@@ -17,9 +17,7 @@ public class UndoCommand implements Command {
     public void execute(ArrayList<String> documentLines) {
         ArrayList<String> tempDocumentLines = restoreMemento(editorCaretaker.pop());
         documentLines.clear();
-        if(tempDocumentLines != null) {
-            documentLines.addAll(tempDocumentLines);
-        }
+        if(tempDocumentLines != null) { documentLines.addAll(tempDocumentLines); }
     }
 
     private ArrayList<String> restoreMemento(Memento memento) {

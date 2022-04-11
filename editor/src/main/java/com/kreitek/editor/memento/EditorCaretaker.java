@@ -12,9 +12,7 @@ public class EditorCaretaker {
     public Memento pop() {
         if (mementos.size() > 0) {
             mementos.remove(mementos.size() - 1);
-            if (mementos.size() != 0) {
-                return mementos.get(mementos.size() - 1);
-            }
+            if (mementos.size() != 0) { return mementos.get(mementos.size() - 1); }
         }
         return null;
     }

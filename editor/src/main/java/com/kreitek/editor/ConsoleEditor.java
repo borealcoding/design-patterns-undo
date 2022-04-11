@@ -1,7 +1,8 @@
 package com.kreitek.editor;
 
 import com.kreitek.editor.commands.CommandFactory;
-import com.kreitek.editor.memento.Memento;
+import com.kreitek.editor.interfaces.Command;
+import com.kreitek.editor.interfaces.Editor;
 
 import java.util.*;
 
@@ -51,6 +52,8 @@ public class ConsoleEditor implements Editor {
             }
             printLnToConsole("<== END DOCUMENT");
             setTextColor(TEXT_RESET);
+        } else {
+            printLnToConsole("\n== Document is empty ==\n");
         }
     }
 
